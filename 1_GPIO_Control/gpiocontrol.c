@@ -5,8 +5,8 @@
 
 static struct gpio_desc *led, *button;
 
-#define IO_LED 23
-#define IO_BUTTON 24
+#define IO_LED 535
+#define IO_BUTTON 536
 
 #define IO_OFFSET 0
 
@@ -17,24 +17,24 @@ int __init initModule(void){
 	printk("Initializing kernel module\n");
 	led = gpio_to_desc(IO_LED + IO_OFFSET);
 	if(!led){
-		printk("gpioctrl - Error getting pin 21");
+		printk("gpioctrl - Error getting pin 23");
 		return -ENODEV;
 	}       
       	button = gpio_to_desc(IO_BUTTON + IO_OFFSET);
 	 if(!button){
-		 printk("gpioctrl - Error getting pin 20");
+		 printk("gpioctrl - Error getting pin 24");
 		 return -ENODEV;
  	}
 
-	status = gpiod_direction_output(led, 0);
+	status = gpiod_direction_output(led, 0); /* 0 is init value for led */
 	if(status){
-		printk("gpioctrl - Error getting gpio 21 to output");
+		printk("gpioctrl - Error getting gpio 23 to output");
 		return status;
 	}
 	
 	status = gpiod_direction_input(button);
 	if(status){
-		printk("gpioctrl - Error setting pin 21 to input");
+		printk("gpioctrl - Error setting pin 24 to input");
 		return status;
 	}
 
