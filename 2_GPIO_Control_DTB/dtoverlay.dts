@@ -1,0 +1,19 @@
+/dts-v1/;
+/plugin/;
+
+/* Defines GPIO_ACTIVE_LOW */
+#include "/usr/src/linux-headers-6.6.31+rpt-common-rpi/include/dt-bindings/gpio/gpio.h"
+
+/ {
+   compatible = "brcm,bcm7212";
+   fragment@0 {
+	target-path = "/";
+	__overlay__ {
+		demo-led {
+			compatible = "eby,demo-gpio-driver";
+			led-gpios = <&rp1_gpio, 13, GPIO_ACTIVE_LOW>;
+			};
+		};
+	};		
+};
+
